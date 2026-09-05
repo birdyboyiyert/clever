@@ -1,0 +1,26 @@
+{
+	"name": "clever-proxy",
+	"version": "1.0.0",
+	"description": "A real web proxy (Scramjet + Wisp) that fetches and rewrites pages server-side.",
+	"main": "server.js",
+	"type": "module",
+	"scripts": {
+		"dev": "node server.js",
+		"start": "node server.js"
+	},
+	"engines": {
+		"node": ">=18"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "AGPL-3.0-only",
+	"dependencies": {
+		"@mercuryworkshop/proxy-bootstrap": "*",
+		"express": "^4.21.2"
+	},
+	"devDependencies": {
+		"@mercuryworkshop/scramjet-utils": "*",
+		"@mercuryworkshop/scramjet-controller": "*",
+		"@mercuryworkshop/scramjet": "*"
+	}
+}
