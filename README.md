@@ -23,6 +23,8 @@ node server.js
 
 Then open `http://localhost:3030`.
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/birdyboyiyert/clever-proxy)
+
 ## Deploying it as an actual website
 
 Unlike `clever`, **this cannot be a static site** — the server component (the part that actually fetches pages on your behalf) has to run continuously somewhere. GitHub Pages can't do that. A `render.yaml` is included for a one-click deploy to [Render](https://render.com)'s free tier:
