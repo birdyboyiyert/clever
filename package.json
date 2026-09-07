@@ -1,7 +1,7 @@
 {
-	"name": "clever-proxy",
+	"name": "clever",
 	"version": "1.0.0",
-	"description": "A real web proxy (Scramjet + Wisp) that fetches and rewrites pages server-side.",
+	"description": "Loads any site you point it at, even ones that would otherwise be blocked.",
 	"main": "server.js",
 	"type": "module",
 	"scripts": {

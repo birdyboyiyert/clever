@@ -1,18 +1,14 @@
-# clever-proxy
+# clever
 
-A real web proxy: type an address, and the page loads through this server instead of your browser talking to the destination site directly. Unlike [`clever`](https://github.com/birdyboyiyert/clever) (a plain iframe browser — simple, but blocked by any site that refuses to be framed, and blocked by any network filter that just blocks the destination domain), this one actually gets around both, because the destination site only ever sees a request from *this server*, not from your browser.
+Type an address, it loads — even sites that are otherwise blocked or unavailable to you directly.
 
-## What this actually is
+## How it works
 
-This is proxy technology in the same family as **Ultraviolet** and **Rammerhead** — the tech behind most "unblocked site" tools. Concretely, it's built on **[Scramjet](https://github.com/MercuryWorkshop/scramjet)** + the **Wisp protocol** (both from Mercury Workshop), scaffolded with their official [`create-proxy-app`](https://www.npmjs.com/package/create-proxy-app) generator.
+Instead of your browser going straight to the site, the request is routed through this server first. The server fetches the real page and hands it back. Because your device only ever talks to this server (not the destination site directly), it works in situations where the direct connection wouldn't — a blocked domain, a site that refuses to be shown inside another page, etc.
 
-**How it works:**
-1. A service worker registers on the page and intercepts every request the page makes.
-2. Instead of your browser resolving `example.com` itself, the request gets rewritten and sent to *this server* over a WebSocket (the Wisp protocol).
-3. The server makes the real request to `example.com`, gets the response, and hands it back through the same WebSocket. The service worker unwraps it and serves it to the page as if it came from `example.com` directly.
-4. Your network only ever sees you talking to wherever this server is hosted — never the actual destination. That's what lets it load sites a domain-based filter blocks, and sites that set `X-Frame-Options`/CSP to refuse being iframed (which is what stopped the plain `clever` iframe browser on sites like Google).
+Built on **[Scramjet](https://github.com/MercuryWorkshop/scramjet)** and the **Wisp protocol** (both from Mercury Workshop), scaffolded with their official [`create-proxy-app`](https://www.npmjs.com/package/create-proxy-app) generator.
 
-**Be honest with yourself about what this is for.** This exact technology is legitimately used for privacy and getting around state-level censorship — and is also the standard way students bypass school/work network filters, which is very likely against whatever policy governs that network. Nothing here checks or cares which one you're doing. That's on you.
+**Be honest with yourself about what you're using this for.** This kind of tool gets used for legitimate things (privacy, getting around state-level censorship) and also to get around rules your school or workplace has set on their own network. Nothing here checks or cares which one you're doing — that's on you.
 
 ## Running it locally
 
@@ -23,17 +19,17 @@ node server.js
 
 Then open `http://localhost:3030`.
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/birdyboyiyert/clever-proxy)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/birdyboyiyert/clever)
 
 ## Deploying it as an actual website
 
-Unlike `clever`, **this cannot be a static site** — the server component (the part that actually fetches pages on your behalf) has to run continuously somewhere. GitHub Pages can't do that. A `render.yaml` is included for a one-click deploy to [Render](https://render.com)'s free tier:
+This needs a real server running continuously — it can't be a static site (GitHub Pages, etc. won't work). A `render.yaml` is included for a one-click deploy to [Render](https://render.com)'s free tier:
 
 1. Push this repo to GitHub (already done if you're reading this from the repo).
 2. On Render: **New +** → **Blueprint** → connect this repo → it reads `render.yaml` automatically → Deploy.
-3. Render gives you a `https://clever-proxy-xxxx.onrender.com` URL. That's the live site.
+3. Render gives you a live `https://clever-xxxx.onrender.com` URL.
 
-Free-tier Render web services spin down after 15 minutes of no traffic and take ~30-60s to wake back up on the next request — normal for a free-tier demo, not a bug. Other free Node hosts (Railway, Fly.io, Cyclic) work the same way, just point them at `npm install` / `node server.js`.
+Free-tier Render services spin down after 15 minutes of no traffic and take ~30-60s to wake back up on the next request — normal for a free-tier demo, not a bug.
 
 ## Credits
 
